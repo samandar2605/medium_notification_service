@@ -8,7 +8,6 @@ import (
 	emailPkg "github.com/samandar2605/medium_notification_service/pkg/email"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type NotificationService struct {
@@ -22,7 +21,7 @@ func NewNotificationService(cfg *config.Config) *NotificationService {
 	}
 }
 
-func (s *NotificationService) SendEmail(ctx context.Context, req *pb.SendEmailRequest) (*emptypb.Empty, error) {
+func (s *NotificationService) SendEmail(ctx context.Context, req *pb.SendEmailRequest) (*pb.Empty, error) {
 	err := emailPkg.SendEmail(s.cfg, &emailPkg.SendEmailRequest{
 		To:      []string{req.To},
 		Subject: req.Subject,
@@ -32,6 +31,6 @@ func (s *NotificationService) SendEmail(ctx context.Context, req *pb.SendEmailRe
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Internal server error: %v", err)
 	}
-	return &emptypb.Empty{}, nil
+	return &pb.Empty{}, nil
 
 }
