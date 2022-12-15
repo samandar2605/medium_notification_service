@@ -33,5 +33,4 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Error while listening: %v", err)
 	}
-
 }

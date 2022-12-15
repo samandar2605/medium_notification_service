@@ -17,7 +17,6 @@ type Smtp struct {
 
 func Load(path string) Config {
 	godotenv.Load(path + "/.env") // load .env file if it exists
-
 	conf := viper.New()
 	conf.AutomaticEnv()
 

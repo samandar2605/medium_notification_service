@@ -17,7 +17,7 @@ print:
 swag-init:
 	swag init -g api/api.go -o api/docs
 
-start:
+run:
 	go run cmd/main.go
 
 migrateup:
