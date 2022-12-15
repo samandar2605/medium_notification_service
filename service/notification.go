@@ -22,7 +22,7 @@ func NewNotificationService(cfg *config.Config) *NotificationService {
 	}
 }
 
-func (s *NotificationService) SendEmail(ctx context.Context, req *pb.SendEmailRequest) (*pb.Vacant, error) {
+func (s *NotificationService) SendEmail(ctx context.Context, req *pb.SendEmailRequest) (*pb.Unoccupied, error) {
 	fmt.Println(req)
 	err := emailPkg.SendEmail(s.cfg, &emailPkg.SendEmailRequest{
 		To:      []string{req.To},
@@ -33,5 +33,5 @@ func (s *NotificationService) SendEmail(ctx context.Context, req *pb.SendEmailRe
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Internal server error: %v", err)
 	}
-	return &pb.Vacant{}, nil
+	return &pb.Unoccupied{}, nil
 }

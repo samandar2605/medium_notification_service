@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NotificationServiceClient interface {
-	SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*Vacant, error)
+	SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*Unoccupied, error)
 }
 
 type notificationServiceClient struct {
@@ -33,8 +33,8 @@ func NewNotificationServiceClient(cc grpc.ClientConnInterface) NotificationServi
 	return &notificationServiceClient{cc}
 }
 
-func (c *notificationServiceClient) SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*Vacant, error) {
-	out := new(Vacant)
+func (c *notificationServiceClient) SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*Unoccupied, error) {
+	out := new(Unoccupied)
 	err := c.cc.Invoke(ctx, "/genproto.NotificationService/SendEmail", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *notificationServiceClient) SendEmail(ctx context.Context, in *SendEmail
 // All implementations must embed UnimplementedNotificationServiceServer
 // for forward compatibility
 type NotificationServiceServer interface {
-	SendEmail(context.Context, *SendEmailRequest) (*Vacant, error)
+	SendEmail(context.Context, *SendEmailRequest) (*Unoccupied, error)
 	mustEmbedUnimplementedNotificationServiceServer()
 }
 
@@ -54,7 +54,7 @@ type NotificationServiceServer interface {
 type UnimplementedNotificationServiceServer struct {
 }
 
-func (UnimplementedNotificationServiceServer) SendEmail(context.Context, *SendEmailRequest) (*Vacant, error) {
+func (UnimplementedNotificationServiceServer) SendEmail(context.Context, *SendEmailRequest) (*Unoccupied, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmail not implemented")
 }
 func (UnimplementedNotificationServiceServer) mustEmbedUnimplementedNotificationServiceServer() {}
