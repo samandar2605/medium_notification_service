@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/samandar2605/medium_notification_service/config"
 	pb "github.com/samandar2605/medium_notification_service/genproto/notification_service"
@@ -18,12 +17,12 @@ type NotificationService struct {
 
 func NewNotificationService(cfg *config.Config) *NotificationService {
 	return &NotificationService{
-		cfg: cfg,
+		cfg:                                    cfg,
+		UnimplementedNotificationServiceServer: pb.UnimplementedNotificationServiceServer{},
 	}
 }
 
 func (s *NotificationService) SendEmail(ctx context.Context, req *pb.SendEmailRequest) (*pb.Unoccupied, error) {
-	fmt.Println(req)
 	err := emailPkg.SendEmail(s.cfg, &emailPkg.SendEmailRequest{
 		To:      []string{req.To},
 		Subject: req.Subject,

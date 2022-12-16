@@ -31,10 +31,11 @@ func SendEmail(cfg *config.Config, req *SendEmailRequest) error {
 
 	templatePath := getTemplatePath(req.Type)
 	t, err := template.ParseFiles(templatePath)
+	fmt.Println("Hakuna")
 	if err != nil {
 		return err
 	}
-
+	fmt.Println("Maaa")
 	t.Execute(&body, req.Body)
 
 	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
@@ -46,7 +47,7 @@ func SendEmail(cfg *config.Config, req *SendEmailRequest) error {
 	if err != nil {
 		return err
 	}
-
+	fmt.Println("Tataaaa")
 	return nil
 }
 
